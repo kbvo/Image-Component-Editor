@@ -163,9 +163,6 @@ private:
      */
     void deallocateImage(uint8_t*** img) const;
 
-    //===========================================================
-    //  Add other private functions as necessary
-
 
 
     //===========================================================
@@ -188,9 +185,6 @@ private:
 
     /// Vector to store the Components we find in the image
     std::vector<Component> components_;
-
-    //===========================================================
-    // Add any other data member(s)
 
 };
 #endif
