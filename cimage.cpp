@@ -5,8 +5,6 @@
 #include <iomanip>
 #include <iostream>
 #include <cmath>
-// You shouldn't need other #include's - Ask permission before adding
-
 using namespace std;
 
 // TO DO: Complete this function
@@ -245,8 +243,7 @@ void CImage::deallocateImage(uint8_t*** img) const
     img = nullptr;
 }
 
-// TODO: Complete the following function or delete this if
-//       you do not wish to use it.
+// TODO: Complete the following function
 Component CImage::bfsComponent(int pr, int pc, int mylabel)
 {
     // Arrays to help produce neighbors easily in a loop
@@ -386,6 +383,3 @@ void CImage::drawBoundingBoxesAndSave(const char* filename)
     }
     writeRGBBMP(filename, img_, h_, w_);
 }
-
-// Add other (helper) function definitions here
-
