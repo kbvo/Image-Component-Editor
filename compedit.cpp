@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     }
 
     // ===================
-    // Complete - Review for your own understanding
+    // Complete
     char option;
     int cid;
     bool again = true;
@@ -88,10 +88,6 @@ int main(int argc, char *argv[])
             again = false;
         }
     } while(again);
-
-    // ===================
-    // If necessary, add any cleanup code
-
 
     return 0;
 }
