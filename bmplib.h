@@ -8,7 +8,6 @@ const int SIZE = 256;
 const int RGB = 3;
 // Note: the read-write functions return 0 on success, 1 on error.
 
-// USE THESE FOR PR4
 //================================
 uint8_t ***readRGBBMP(const char filename[], int& height,int& width);
 
