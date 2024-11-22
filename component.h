@@ -7,7 +7,6 @@
  * @brief Models a row/column location and provides an
  *        initializing constructor and comparison ability
  *
- *  COMPLETE - DO NOT ALTER
  */
 struct Location {
     int row;
@@ -63,10 +62,8 @@ struct Component {
     Location ulOrig;
     // translated upper-left location
     Location ulNew;
-    // height and width
     int height;
     int width;
-    // label
     int label;
 };
 #endif
