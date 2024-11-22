@@ -15,27 +15,17 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // ===================
-    // TO DO: Fill in the argument to the constructor below
     CImage img1(argv[1]);
 
-    // ===================
-    // TO DO: call findComponents
     img1.findComponents();
 
-
-    // ===================
-    // Complete - Do not alter
-    //   Debug options for testing
     if(argc >= 3) {
         int debug = 0;
         debug = atoi(argv[2]);
         if(debug == 1) {
-            // Complete - Do not alter
             img1.printComponents();
         }
         else if(debug == 2 || debug == 3) {
-            // Complete - Do not alter
             if(argc < 4) {
                 cout << "Please provide an extra argument of the filename to save the image." << endl;
             }
@@ -49,8 +39,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // ===================
-    // Complete
     char option;
     int cid;
     bool again = true;
