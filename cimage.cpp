@@ -7,7 +7,6 @@
 #include <cmath>
 using namespace std;
 
-// TO DO: Complete this function
 CImage::CImage(const char* bmp_filename)
 {
     //  Note: readRGBBMP dynamically allocates a 3D array
@@ -16,11 +15,9 @@ CImage::CImage(const char* bmp_filename)
     //    point to an array of 3 unsigned char (uint8_t) pixels [R,G,B values])
 
     // ================================================
-    // TO DO: call readRGBBMP to initialize img_, h_, and w_;
     img_ = readRGBBMP(bmp_filename, h_, w_);
 
 
-    // Leave this check
     if(img_ == NULL) {
         throw std::logic_error("Could not read input file");
     }
@@ -30,22 +27,19 @@ CImage::CImage(const char* bmp_filename)
         bgColor_[i] = img_[0][0][i];
     }
 
-    // ======== This value should work - do not alter it =======
     // RGB "distance" threshold to continue a BFS from neighboring pixels
     bfsBgrdThresh_ = 60;
 
-    // ================================================
-    // TO DO: Initialize the vector of vectors of labels to -1
     labels_ = vector<vector<int>>(h_, vector<int>(w_, -1));
 }
 
-// TO DO: Complete this function
+
 CImage::~CImage()
 {
     deallocateImage(img_);
 }
 
-// Complete - Do not alter
+
 bool CImage::isCloseToBground(uint8_t p1[3], double within) {
     // Computes "RGB" (3D Cartesian distance)
     double dist = sqrt( pow(p1[0]-bgColor_[0],2) +
@@ -54,7 +48,7 @@ bool CImage::isCloseToBground(uint8_t p1[3], double within) {
     return dist <= within;
 }
 
-// TO DO: Complete this function
+
 size_t CImage::findComponents()
 {
   size_t componentCount = 0;
@@ -77,7 +71,7 @@ size_t CImage::findComponents()
   return componentCount;
 }
 
-// Complete - Do not alter
+
 void CImage::printComponents() const
 {
     cout << "Height and width of image: " << h_ << "," << w_ << endl;
@@ -91,7 +85,6 @@ void CImage::printComponents() const
 }
 
 
-// TODO: Complete this function
 int CImage::getComponentIndex(int mylabel) const
 {
   for (size_t i = 0; i < components_.size(); i++) {
@@ -104,9 +97,7 @@ int CImage::getComponentIndex(int mylabel) const
 }
 
 
-// Nearly complete - TO DO:
-//   Add checks to ensure the new location still keeps
-//   the entire component in the legal image boundaries
+
 void CImage::translate(int mylabel, int nr, int nc)
 {
     // Get the index of specified component
@@ -117,22 +108,16 @@ void CImage::translate(int mylabel, int nr, int nc)
     int h = components_[cid].height;
     int w = components_[cid].width;
 
-    // ==========================================================
-    // ADD CODE TO CHECK IF THE COMPONENT WILL STILL BE IN BOUNDS
-    // IF NOT:  JUST RETURN.
-    // if translated location is out of bounds
+   
+
     if (nr < 0 || nc < 0 || nr + h > h_ || nc + w > w_) {
       return; // translated location is out of bounds
     }
-    // ==========================================================
 
-    // If we reach here we assume the component will still be in bounds
-    // so we update its location.
     Location nl(nr, nc);
     components_[cid].ulNew = nl;
 }
 
-// TO DO: Complete this function
 void CImage::forward(int mylabel, int delta)
 {
     int cid = getComponentIndex(mylabel);
@@ -154,7 +139,7 @@ void CImage::forward(int mylabel, int delta)
     }
 }
 
-// TO DO: Complete this function
+
 void CImage::backward(int mylabel, int delta)
 {
     int cid = getComponentIndex(mylabel);
@@ -176,7 +161,7 @@ void CImage::backward(int mylabel, int delta)
     }
 }
 
-// TODO: complete this function
+
 void CImage::save(const char* filename)
 {
     // Create another image filled in with the background color
@@ -212,7 +197,7 @@ void CImage::save(const char* filename)
     deallocateImage(out); // deallocate image
 }
 
-// Complete - Do not alter - Creates a blank image with the background color
+
 uint8_t*** CImage::newImage(uint8_t bground[3]) const
 {
     uint8_t*** img = new uint8_t**[h_];
@@ -228,7 +213,7 @@ uint8_t*** CImage::newImage(uint8_t bground[3]) const
     return img;
 }
 
-// To be completed
+
 void CImage::deallocateImage(uint8_t*** img) const
 {
     if (img != nullptr) {
@@ -243,7 +228,7 @@ void CImage::deallocateImage(uint8_t*** img) const
     img = nullptr;
 }
 
-// TODO: Complete the following function
+
 Component CImage::bfsComponent(int pr, int pc, int mylabel)
 {
     // Arrays to help produce neighbors easily in a loop
@@ -314,10 +299,9 @@ Component CImage::bfsComponent(int pr, int pc, int mylabel)
     return boundingBox;
 }
 
-// Complete - Debugging function to save a new image
+
 void CImage::labelToRGB(const char* filename)
 {
-    //multiple ways to do this -- this is one way
     vector<uint8_t[3]> colors(components_.size());
     for(unsigned int i=0; i<components_.size(); i++) {
         colors[i][0] = rand() % 256;
@@ -342,7 +326,7 @@ void CImage::labelToRGB(const char* filename)
     writeRGBBMP(filename, img_, h_, w_);
 }
 
-// Complete - Do not alter
+
 const Component& CImage::getComponent(size_t i) const
 {
     if(i >= components_.size()) {
@@ -351,13 +335,13 @@ const Component& CImage::getComponent(size_t i) const
     return components_[i];
 }
 
-// Complete - Do not alter
+
 size_t CImage::numComponents() const
 {
     return components_.size();
 }
 
-// Complete - Do not alter
+
 void CImage::drawBoundingBoxesAndSave(const char* filename)
 {
     for(size_t i=0; i < components_.size(); i++){
